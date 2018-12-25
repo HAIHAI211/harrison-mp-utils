@@ -50,6 +50,7 @@ export default {
     },
     methods: {
         async fetchList (isRefresh = true) {
+            // console.log('fetchList')
             if (isRefresh) {
                 this.activePage.pageNum = this.initPageNum
                 this.activePage.pageCount = 0
@@ -70,19 +71,19 @@ export default {
             // console.log('请求列表的参数', params)
             this.loadingState = LOADING_STATE_ENUM.IS_LOADING
             try {
-                const result = await api[this.activeApi](params)
+                const result = await this.activeApi(params)
                 // console.log(this.activeApi, result)
                 this.activePage.list = isRefresh ? result[this.listKeyName] : [...this.activePage.list, ...result[this.listKeyName]]
                 this.activePage.pageCount = result[this.pageCountKeyName]
                 this.loadingState = this.activePage.pageNum < this.activePage.pageCount ? LOADING_STATE_ENUM.NO_SHOW : LOADING_STATE_ENUM.ALL_OVER // 0:不可见 1:正在加载 2:全部加载完毕 3:异常
             } catch (e) {
-                // console.log(e)
+                throw e
                 this.loadingState = LOADING_STATE_ENUM.ERROR
             }
         }
     },
     async onPullDownRefresh () { // 下拉刷新
-        // console.log('下拉刷新')
+        // console.log('下拉刷新', this.listKeyName)
         await this.fetchList()
         wx.stopPullDownRefresh()
     },
