@@ -85,3 +85,26 @@ export function isToday(date) { // 判断date是否是此时此刻所在的今�
     return isStepDay(date, 0)
 }
 
+export function timeGapFromNow (date1, todayDetail = true) {
+    let date2 = new Date()
+    let timeGap = date2.getTime() - date1.getTime()
+    let m1 = timeGap % (24 * 3600 * 1000)
+    let m2 = m1 % (3600 * 1000)
+    let days = Math.floor(timeGap / (24 * 3600 * 1000))
+    let hours = Math.floor(m1 / (3600 * 1000))
+    let minutes = Math.floor(m2 / (60 * 1000))
+    if (days === 0) {
+        return todayDetail ? (hours === 0 ? `${minutes}分钟前` : `${hours}小时前`) : '今天'
+    } else if (days === 1) {
+        return '昨天'
+    } else if (days === 2) {
+        return '前天'
+    } else if (days < 30) {
+        return `${days}天前`
+    } else if (days < 60) {
+        return '一个月前'
+    } else {
+        return getDate(date1).fullFormatDate
+    }
+}
+
