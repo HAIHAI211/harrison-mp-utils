@@ -49,11 +49,11 @@ export function getDate(date,options={
 
     let detail = {}
     if (options.showDetail) {
-        let isToday = isToday(date)
-        let isYesterday = isYesterday(date)
+        let today = isToday(date)
+        let yesterday = isYesterday(date)
         detail = {
-            isToday,
-            isYesterday
+            isToday: today,
+            isYesterday: yesterday
         }
     }
 
