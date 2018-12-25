@@ -12,6 +12,7 @@
  *   run-loading 加载组件（mpvue存在bug）
  * */
 import {LOADING_STATE_ENUM} from "../enum";
+import {sleep} from "../rest";
 
 export default {
     components: {
@@ -61,14 +62,13 @@ export default {
                     return
                 }
             }
-            let params = {
+            let params = Object.assign(this.params, {
                 pageNum: this.activePage.pageNum,
-                pageSize: this.activePage.pageSize,
-                ...this.params
-            }
+                pageSize: this.activePage.pageSize
+            })
             // 开始请求
             // console.log('请求列表的参数', params)
-            this.loadingState = 1
+            this.loadingState = LOADING_STATE_ENUM.IS_LOADING
             try {
                 const result = await api[this.activeApi](params)
                 // console.log(this.activeApi, result)
