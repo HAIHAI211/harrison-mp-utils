@@ -2,7 +2,7 @@
  ** 引入mixinPullToRefresh的页面
  * 需要自定义如下data或computed
  * data
- *   apis 列表请求所对应的api名称数组
+ *   apis 请求函数数组 (必填)
  *   initPageNum pageNum的初始页码
  *   listKeyName 返回对象的list的键名
  *   pageCount 返回对象的pageCount的键名
