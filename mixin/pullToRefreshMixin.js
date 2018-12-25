@@ -5,9 +5,9 @@
  *   apis 请求函数数组 (必填)
  *   initPageNum pageNum的初始页码
  *   listKeyName 返回对象的list的键名
- *   pageCount 返回对象的pageCount的键名
+ *   pageCountKeyName 返回对象的pageCount的键名
  * computed
- *   params 自定义的请求参数
+ *   params 自定义的请求参数 // 因为不确定是data还是computed，故在data里不声明
  *  components
  *   run-loading 加载组件（mpvue存在bug）
  * */
@@ -63,10 +63,11 @@ export default {
                     return
                 }
             }
-            let params = Object.assign(this.params, {
+            let pageParams = {
                 pageNum: this.activePage.pageNum,
                 pageSize: this.activePage.pageSize
-            })
+            }
+            let params = this.params ? Object.assign(this.params, pageParams) : pageParams
             // 开始请求
             // console.log('请求列表的参数', params)
             this.loadingState = LOADING_STATE_ENUM.IS_LOADING
