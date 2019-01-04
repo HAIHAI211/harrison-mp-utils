@@ -2,7 +2,7 @@
   "name": "harrison-mp-utils",
   "version": "1.5.0",
   "description": "小程序工具库",
-  "main": "index.js",
+  "main": "main.js",
   "directories": {
     "test": "test"
   },
@@ -10,5 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "harrison",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.28.3"
+  }
 }
